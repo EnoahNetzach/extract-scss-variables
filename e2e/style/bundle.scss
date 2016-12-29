@@ -1,0 +1,19 @@
+// Foundation settings override
+@import 'settings';
+
+// Foundation definitions
+@import 'foundation';
+
+// Project definitions
+@import 'globals';
+
+.scoped-style {
+  // Foundation mixins
+  @include foundation-button;
+  @include foundation-flex-classes;
+  @include foundation-flex-grid;
+  @include foundation-forms;
+  @include foundation-typography;
+
+  font-family: $body-font-family;
+}

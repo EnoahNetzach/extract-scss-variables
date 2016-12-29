@@ -2,7 +2,7 @@ const fs = require('fs')
 const sass = require('node-sass')
 const path = require('path')
 
-const globalVariableSyntax = /\$'?((?!\d)[\w_-][\w\d_-]*)'?:\s*([^;]+)(?:\s*!global;|;(?![^\{]*\}))/
+const globalVariableSyntax = '\\$\'?((?!\\d)[\\w_-][\\w\\d_-]*)\'?:\\s*([^;]+)(?:\\s*!global;|;(?![^\\{]*\\}))'
 
 const idOp = a => a
 const flattenArrays = (carry, array) => carry.concat(array)
@@ -39,10 +39,10 @@ const isAMap = (value) => {
     .acc
 }
 
-const parseDeclaration = (declaration, prefix = '') => {
+const parseDeclaration = (declaration, prefix) => {
   const matches = declaration
     .replace(/!default\s*;/, ';')
-    .match(new RegExp(globalVariableSyntax, 'u'))
+    .match(new RegExp(globalVariableSyntax))
   const variable = matches[1].trim().replace('_', '-')
   const prefixed = prefix ? `${prefix}_${variable}` : variable
   const value = matches[2].trim()
@@ -59,24 +59,23 @@ const parseDeclaration = (declaration, prefix = '') => {
 }
 
 const wrappingCssId = 'extract-scss-values-test-class'
-const wrap = (variable, value) =>
-  `#${wrappingCssId}.${variable}{content:"#{${value}}";}`
+const wrap = (variable, value) => `#${wrappingCssId}.${variable}{content:"#{${value}}";}`
 const unwrapRegExp = `${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*"(.+)"`
 
-module.exports = ({ entryPoint, files, sassOptions = {} }) => {
-  const main = fs.readFileSync(entryPoint).toString()
-  const contents = files.map(file => fs.readFileSync(file).toString())
+module.exports = (opts) => {
+  const main = fs.readFileSync(opts.entryPoint).toString()
+  const contents = opts.files.map(file => fs.readFileSync(file).toString())
 
-  const options = Object.assign({}, sassOptions, {
-    includePaths: [path.dirname(entryPoint), ...(sassOptions.includePaths || [])],
+  const options = Object.assign({}, opts.sassOptions, {
+    includePaths: [path.dirname(opts.entryPoint)].concat(opts.sassOptions.includePaths || []),
   })
 
   return contents
-    .map(content => content.match(new RegExp(globalVariableSyntax, 'gu')))
+    .map(content => content.match(new RegExp(globalVariableSyntax, 'g')))
     .reduce(flattenArrays, [])
     .map(element => parseDeclaration(element))
     .reduce(flattenArrays, [])
-    .reduce((carry, { value, variable }) => `${carry}\n${wrap(variable, value)}`, main)
+    .reduce((carry, entry) => `${carry}\n${wrap(entry.variable, entry.value)}`, main)
     .split()
     .map(data => sass.renderSync(Object.assign({}, options, { data })).css.toString())
     .join()

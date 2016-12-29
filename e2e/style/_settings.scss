@@ -1,0 +1,24 @@
+// sass-lint:disable no-url-domains no-url-protocols
+@import url('//fonts.googleapis.com/css?family=Lato:400,700');
+// sass-lint:enable no-url-domains no-url-protocols
+
+$body-font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Palette
+$foundation-palette: (
+  alert: rgb(249, 92, 40),
+  background: rgb(246, 249, 252),
+  background-dark: rgb(39, 75, 101),
+  divider: rgb(240, 240, 240),
+  primary: rgb(72, 191, 204),
+  primary-light: rgb(54, 202, 217),
+  secondary: rgb(248, 248, 248),
+  secondary-light: rgb(250, 250, 250),
+  success: rgb(72, 204, 84),
+  text: rgb(52, 58, 67),
+  warning: rgb(247, 190, 44),
+);
+
+$global-flexbox: true;
+$global-font-size: 14px;
+$global-radius: 4px;

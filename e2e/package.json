@@ -1,0 +1,10 @@
+{
+  "name": "@extract-scss-variables/e2e",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+    "foundation-sites": "^6.3.0",
+    "node-sass": "^4.1.1"
+  }
+}
