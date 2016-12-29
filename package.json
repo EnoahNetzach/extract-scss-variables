@@ -1,0 +1,22 @@
+{
+  "name": "extract-scss-variables",
+  "version": "0.1.0",
+  "description": "Extract variables from SCSS files",
+  "keywords": [
+    "extract",
+    "scss",
+    "variables"
+  ],
+  "author": {
+    "name" : "Fabrizio Castellarin",
+    "url" : "https://github.com/EnoahNetzach"
+  },
+  "bugs": {
+    "url" : "https://github.com/EnoahNetzach/extract-scss-variables/issues"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "peerDependencies": {
+    "node-sass": "^4.1.1"
+  }
+}
