@@ -1,0 +1,69 @@
+clone_folder: C:\projects\extract-scss-variables
+platform: x64
+
+cache:
+  - node_modules
+  - e2e/node_modules
+  - '%APPDATA%\npm-cache'
+
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: UG9YjswVMAqa7lyIS3uxVVvriVcJ+oefODFfJRyesvKW/EPN1ZIKTGIfAcduqkly
+  matrix:
+    - nodejs_version: 4
+      NODE_SASS: 3
+    - nodejs_version: 4
+      NODE_SASS: 4
+    - nodejs_version: 6
+      NODE_SASS: 3
+    - nodejs_version: 6
+      NODE_SASS: 4
+    - nodejs_version: 7
+      NODE_SASS: 3
+    - nodejs_version: 7
+      NODE_SASS: 4
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+
+  - node --version
+  - node -p "process.arch"
+  - npm --version
+
+  - npm install
+  - ps: $env:package_path = "$(pwd)\$(npm pack)"
+  - npm install -S node-sass@^%NODE_SASS%
+
+  - cd C:\projects\extract-scss-variables\e2e
+  - npm install
+  - npm install -S node-sass@^%NODE_SASS% %package_path%
+  - cd C:\projects\extract-scss-variables
+
+test_script:
+  - cd C:\projects\extract-scss-variables\e2e
+
+  # Test the node version
+  - node index.js
+
+  # Test the CLI version with a JSON string
+  - ps: $env:tmp_file_json_string = "tmp-json-string.out"
+  - ps: node_modules\.bin\extract-scss-variables style\bundle.scss -f node_modules\foundation-sites\scss\settings\_settings.scss -f node_modules\foundation-sites\scss\_global.scss -f style\_settings.scss -f style\_globals.scss -c '{^\"includePaths\":[\"node_modules\\foundation-sites\\scss\"]}' -o %tmp_file_json_string%
+  - ps: if ((Get-Content "$env:tmp_file_json_string") -eq $Null) { exit 1 }
+
+  # Test the CLI version with a JSON file
+  - ps: $env:tmp_file_json_file = "tmp-json-file.out"
+  - ps: node_modules\.bin\extract-scss-variables style\bundle.scss -f node_modules\foundation-sites\scss\settings\_settings.scss -f node_modules\foundation-sites\scss\_global.scss -f style\_settings.scss -f style\_globals.scss -c sass-config.json -o %tmp_file_json_file%
+  - ps: if ((Get-Content "$env:tmp_file_json_file") -eq $Null) { exit 1 }
+
+  # Check coding style
+  - npm run eslint
+
+  # Run tests & coverage
+  - npm test -- --coverage
+
+  - cd C:\projects\extract-scss-variables
+
+build: off
+
+on_success:
+  - ps: cat .\coverage\lcov.info | .\node_modules\.bin\coveralls

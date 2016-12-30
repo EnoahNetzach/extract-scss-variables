@@ -1,6 +1,6 @@
 const variables = require('.').variables
 
-describe('Integration', () => {
+describe('Extract SCSS variables', () => {
   it('produces an object', () => {
     expect(Object.keys(variables).length).toBeGreaterThan(0)
   })
