@@ -1,13 +1,15 @@
 {
   "name": "extract-scss-variables",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Extract variables from SCSS files",
   "keywords": [
     "extract",
     "scss",
     "sass",
     "variables",
-    "node-sass"
+    "node-sass",
+    "javascript",
+    "json"
   ],
   "homepage": "https://github.com/EnoahNetzach/extract-scss-variables",
   "author": {
