@@ -4,6 +4,7 @@
   "private": true,
   "license": "ISC",
   "scripts": {
+    "eslint": "cd .. && npm run eslint --",
     "test": "cd .. && npm test --"
   },
   "dependencies": {

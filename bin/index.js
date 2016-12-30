@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-"use strict"
+/* eslint-disable no-console, strict */
+
+'use strict'
 
 const commander = require('commander')
 const chalk = require('chalk')
@@ -13,7 +15,7 @@ const getFiles = (file, files) => files.concat(file)
 
 const program = commander
   .version(require('../package.json').version)
-  .usage(chalk.green('<entry-point>') + ' [options]')
+  .usage(`${chalk.green('<entry-point>')} [options]`)
   .action((name) => {
     entryPoint = name
   })
@@ -25,17 +27,17 @@ const program = commander
 if (!entryPoint) {
   console.error('Please specify the entry point.')
   console.log()
-  console.log('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.')
+  console.log(`Run ${chalk.cyan(`${program.name()}  --help`)} to see all options.`)
   process.exit(1)
 } else if (program.file.length === 0) {
   console.error('Please specify at least one file.')
   console.log()
-  console.log('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.')
+  console.log(`Run ${chalk.cyan(`${program.name()}  --help`)} to see all options.`)
   process.exit(1)
 } else if (!program.output) {
   console.error('Please specify the output file.')
   console.log()
-  console.log('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.')
+  console.log(`Run ${chalk.cyan(`${program.name()}  --help`)} to see all options.`)
   process.exit(1)
 }
 
