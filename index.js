@@ -11,37 +11,32 @@ const wrappingCssId = 'extract-scss-values-test-class'
 const wrap = (variable, value) => `#${wrappingCssId}.${variable}{content:"#{${value}}";}`
 const unwrapRegExp = `${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*"(.+)"`
 
-const isAMap = (value) => {
-  const couldBe = value.startsWith('(')
-    && value.endsWith(')')
-    && value.includes(',')
-
-  if (!couldBe) {
-    return false
+const splitMap = (carry, char) => {
+  if (carry.opened === 0 && char === ',') {
+    return {
+      acc: carry.acc.concat(''),
+      opened: carry.opened,
+    }
   }
 
-  return value
-    .slice(1, -1)
-    .trim()
-    .split('')
-    .reduce((carry, char) => {
-      if (carry.opened === 0 && char === ',') {
-        return {
-          acc: carry.acc.concat(''),
-          opened: carry.opened,
-        }
-      }
+  const opens = char === '(' ? 1 : 0
+  const closes = char === ')' ? -1 : 0
 
-      const opens = char === '(' ? 1 : 0
-      const closes = char === ')' ? -1 : 0
-
-      return {
-        acc: carry.acc.slice(0, -1).concat(`${carry.acc.slice(-1)[0]}${char}`),
-        opened: carry.opened + opens + closes,
-      }
-    }, { acc: [''], opened: 0 })
-    .acc
+  return {
+    acc: carry.acc.slice(0, -1).concat(`${carry.acc.slice(-1)[0]}${char}`),
+    opened: carry.opened + opens + closes,
+  }
 }
+
+const isAMap = value => value.startsWith('(')
+    && value.endsWith(')')
+    && value.includes(',')
+    && value
+      .slice(1, -1)
+      .trim()
+      .split('')
+      .reduce(splitMap, { acc: [''], opened: 0 })
+      .acc
 
 const extractDeclarations = content => content.match(new RegExp(globalVariableSyntax, 'g'))
 
