@@ -7,6 +7,10 @@ const globalVariableSyntax = '\\$\'?((?!\\d)[\\w_-][\\w\\d_-]*)\'?:\\s*([^;]+)(?
 const idOp = a => a
 const flattenArrays = (carry, array) => carry.concat(array)
 
+const wrappingCssId = 'extract-scss-values-test-class'
+const wrap = (variable, value) => `#${wrappingCssId}.${variable}{content:"#{${value}}";}`
+const unwrapRegExp = `${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*"(.+)"`
+
 const isAMap = (value) => {
   const couldBe = value.startsWith('(')
     && value.endsWith(')')
@@ -39,6 +43,8 @@ const isAMap = (value) => {
     .acc
 }
 
+const extractDeclarations = content => content.match(new RegExp(globalVariableSyntax, 'g'))
+
 const parseDeclaration = (declaration, prefix) => {
   const matches = declaration
     .replace(/!default\s*;/, ';')
@@ -58,39 +64,41 @@ const parseDeclaration = (declaration, prefix) => {
     .map(element => parseDeclaration(`$${element};`, prefixed))
 }
 
-const wrappingCssId = 'extract-scss-values-test-class'
-const wrap = (variable, value) => `#${wrappingCssId}.${variable}{content:"#{${value}}";}`
-const unwrapRegExp = `${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*"(.+)"`
+const appendRules = (carry, entry) => `${carry}\n${wrap(entry.variable, entry.value)}`
+
+const compileSass = options => data => sass.renderSync(Object.assign({}, options, { data })).css.toString()
+
+const unwrap = (rule) => {
+  const matched = rule.match(unwrapRegExp)
+
+  return { variable: matched[1].trim(), value: matched[2] }
+}
+
+const omitDuplicates = (carry, entry) => (!carry[entry.variable]
+  ? Object.assign(carry, { [entry.variable]: entry.value })
+  : carry
+)
 
 module.exports = (opts) => {
   const main = fs.readFileSync(opts.entryPoint).toString()
   const contents = opts.files.map(file => fs.readFileSync(file).toString())
 
-  const options = Object.assign({}, opts.sassOptions, {
-    includePaths: [path.dirname(opts.entryPoint)].concat(opts.sassOptions.includePaths || []),
+  const sassOptions = opts.sassOptions || {}
+  const otions = Object.assign({}, opts.sassOptions, {
+    includePaths: [path.dirname(opts.entryPoint)].concat(sassOptions.includePaths || []),
   })
 
   return contents
-    .map(content => content.match(new RegExp(globalVariableSyntax, 'g')))
+    .map(extractDeclarations)
     .reduce(flattenArrays, [])
     .map(element => parseDeclaration(element))
     .reduce(flattenArrays, [])
-    .reduce((carry, entry) => `${carry}\n${wrap(entry.variable, entry.value)}`, main)
+    .reduce(appendRules, main)
     .split()
-    .map(data => sass.renderSync(Object.assign({}, options, { data })).css.toString())
+    .map(compileSass(otions))
     .join()
     .match(new RegExp(unwrapRegExp, 'g'))
-    .map((rule) => {
-      const matched = rule.match(unwrapRegExp)
-
-      return { variable: matched[1].trim(), value: matched[2] }
-    })
+    .map(unwrap)
     .reverse()
-    .reduce((carry, entry) => {
-      if (carry[entry.variable]) {
-        return carry
-      }
-
-      return Object.assign(carry, { [entry.variable]: entry.value })
-    }, {})
+    .reduce(omitDuplicates, {})
 }
