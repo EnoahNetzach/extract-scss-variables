@@ -21,6 +21,9 @@ trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
 # Produce a packed package
 package_path=../`npm pack`
 
+# Install peer dependencies for later usage
+npm install -S node-sass@^${NODE_SASS}
+
 # Run in this directory
 cd "$(dirname "$0")"
 
@@ -56,3 +59,6 @@ node_modules/.bin/extract-scss-variables \
   -c sass-config.json \
   -o ${tmp_file}
 test ! -z `cat ${tmp_file} | head -c 10`
+
+# Run tests & coverage
+npm test -- --coverage

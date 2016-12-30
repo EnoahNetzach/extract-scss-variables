@@ -1,0 +1,5 @@
+{
+  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/e2e/"],
+  "coverageReporters": ["lcov"],
+  "testEnvironment": "node"
+}

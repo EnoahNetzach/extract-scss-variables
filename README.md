@@ -1,6 +1,7 @@
 # Extract SCSS variables
 
 [![Build Status](https://travis-ci.org/EnoahNetzach/extract-scss-variables.svg?branch=master)](https://travis-ci.org/EnoahNetzach/extract-scss-variables)
+[![Coverage Status](https://coveralls.io/repos/github/EnoahNetzach/extract-scss-variables/badge.svg?branch=master)](https://coveralls.io/github/EnoahNetzach/extract-scss-variables?branch=master)
 [![NPM Version](http://img.shields.io/npm/v/extract-scss-variables.svg?style=flat)](https://www.npmjs.org/package/extract-scss-variables)
 
 An utility for extracting variables from `.scss` files.

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "license": "ISC",
+  "scripts": {
+    "test": "cd .. && npm test --"
+  },
   "dependencies": {
     "foundation-sites": "^6.3.0"
   }
