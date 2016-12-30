@@ -11,3 +11,6 @@ cache:
   - node_modules
   - e2e/node_modules
 script: e2e/run.sh
+env:
+  - NODE_SASS=3
+  - NODE_SASS=4

@@ -1,15 +1,34 @@
 #!/usr/bin/env bash
 
+# Error messages are redirected to stderr
+function handle_error {
+  echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2
+  echo 'Exiting with error.' 1>&2
+  exit 1
+}
+
+function handle_exit {
+  echo 'Exiting without error.' 1>&2
+  exit
+}
+
+# Exit the script with a helpful error message when any error is encountered
+trap 'set +x; handle_error $LINENO $BASH_COMMAND' ERR
+
+# Cleanup before exit on any termination signal
+trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+
+# Produce a packed package
 package_path=../`npm pack`
 
 # Run in this directory
 cd "$(dirname "$0")"
 
-# Log every command
+# Echo every command being executed
 set -x
 
 npm install
-npm install ${package_path}
+npm install -S node-sass@^${NODE_SASS} ${package_path}
 
 # Test the node version
 node index.js
