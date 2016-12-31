@@ -1,4 +1,6 @@
+version: '{build}'
 clone_folder: C:\projects\extract-scss-variables
+image: Visual Studio 2015
 platform: x64
 
 cache:
@@ -24,15 +26,16 @@ environment:
       NODE_SASS: 4
 
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
 
   - node --version
   - node -p "process.arch"
   - npm --version
 
   - npm install
-  - ps: $env:package_path = "$(pwd)\$(npm pack)"
+  - ps: $env:package_path = "$(pwd)\$(npm pack | tail -n1)"
   - npm install -S node-sass@^%NODE_SASS%
+  - npm ls jest
 
   - cd C:\projects\extract-scss-variables\e2e
   - npm install
@@ -58,12 +61,16 @@ test_script:
   # Check coding style
   - npm run eslint
 
+  # Check types
+  - npm run flow check
+
   # Run tests & coverage
   - npm test -- --coverage
 
   - cd C:\projects\extract-scss-variables
 
-build: off
+build_script:
+  - npm run build
 
 on_success:
   - ps: cat .\coverage\lcov.info | .\node_modules\.bin\coveralls

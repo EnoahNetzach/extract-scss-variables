@@ -5,6 +5,7 @@
   "license": "ISC",
   "scripts": {
     "eslint": "cd .. && npm run eslint --",
+    "flow": "cd .. && npm run flow --",
     "test": "cd .. && npm test --"
   },
   "dependencies": {

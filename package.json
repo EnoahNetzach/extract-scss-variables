@@ -24,17 +24,20 @@
     "url": "https://github.com/EnoahNetzach/extract-scss-variables/issues"
   },
   "license": "ISC",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "files": [
-    "index.js",
-    "bin"
+    "bin",
+    "dist"
   ],
   "bin": {
     "extract-scss-variables": "./bin/index.js"
   },
   "scripts": {
+    "build": "babel src -d dist",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "eslint": "clear && eslint . && echo \"No errors found.\"",
+    "eslint": "eslint ./src",
+    "flow": "flow",
+    "prepublish": "npm run build",
     "test": "jest --config .jestrc"
   },
   "dependencies": {
@@ -42,11 +45,16 @@
     "commander": "^2.9.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-import": "^2.2.0",
+    "flow-bin": "^0.37.4",
     "jest": "^18.1.0"
   },
   "peerDependencies": {

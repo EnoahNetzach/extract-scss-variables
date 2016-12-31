@@ -19,10 +19,13 @@ trap 'set +x; handle_error $LINENO $BASH_COMMAND' ERR
 trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
 
 # Produce a packed package
-package_path=../`npm pack`
+package_path=../$(npm pack | tail -n1)
 
 # Install peer dependencies for later usage
 npm install -S node-sass@^${NODE_SASS}
+
+# Build
+npm run build
 
 # Run in this directory
 cd "$(dirname "$0")"
@@ -62,6 +65,9 @@ test ! -z `cat ${tmp_file} | head -c 10`
 
 # Check coding style
 npm run eslint
+
+# Check types
+npm run flow check
 
 # Run tests & coverage
 npm test -- --coverage

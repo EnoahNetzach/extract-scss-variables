@@ -1,6 +1,6 @@
 const path = require('path')
 const extractScssVariables = process.env.NODE_ENV === 'test'
-  ? require('..')
+  ? require('../src')
   : require('extract-scss-variables')
 
 const nodeModulesPath = path.join(__dirname, 'node_modules')
