@@ -36,6 +36,10 @@ set -x
 npm install
 npm install -S node-sass@^${NODE_SASS} ${package_path}
 
+# Test the scss compiles
+npm run scss
+test -e css/bundle.css
+
 # Test the node version
 node index.js
 

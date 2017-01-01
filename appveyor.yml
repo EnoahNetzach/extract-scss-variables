@@ -45,6 +45,10 @@ install:
 test_script:
   - cd C:\projects\extract-scss-variables\e2e
 
+  # Test the scss compiles
+  - npm run scss
+  - ps: if ((Get-Content "css\bundle.css") -eq $Null) { exit 1 }
+
   # Test the node version
   - node index.js
 

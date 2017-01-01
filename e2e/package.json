@@ -6,6 +6,7 @@
   "scripts": {
     "eslint": "cd .. && npm run eslint --",
     "flow": "cd .. && npm run flow --",
+    "scss": "node-sass --output-style expanded --include-path node_modules/foundation-sites/scss/ -o css style",
     "test": "cd .. && npm test --"
   },
   "dependencies": {
