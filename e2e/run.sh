@@ -74,4 +74,4 @@ npm run eslint
 npm run flow check
 
 # Run tests & coverage
-npm test -- --coverage
+npm test -- --no-cache --coverage

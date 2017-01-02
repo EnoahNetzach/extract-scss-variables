@@ -69,7 +69,7 @@ test_script:
   - npm run flow check
 
   # Run tests & coverage
-  - npm test -- --coverage
+  - npm test -- --no-cache --coverage
 
   - cd C:\projects\extract-scss-variables
 

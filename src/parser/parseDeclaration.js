@@ -6,7 +6,7 @@ const globalVariableSyntax = require('./globalVariableSyntax')
 
 const parseDeclaration = (declaration: string, prefix?: string) => {
   const matches = declaration
-    .replace(/!default\s*;/, ';')
+    .replace(/!(default|global)\s*;/, ';')
     .match(new RegExp(globalVariableSyntax))
 
   if (!matches) {

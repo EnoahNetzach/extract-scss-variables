@@ -16,8 +16,10 @@ module.exports = (opts: optsType) => {
   const contents = opts.files.map(file => fs.readFileSync(file).toString())
 
   const sassOptions = opts.sassOptions || {}
+  const includePaths = sassOptions.includePaths || []
+
   const options = Object.assign({}, opts.sassOptions, {
-    includePaths: [path.dirname(opts.entryPoint)].concat(sassOptions.includePaths || []),
+    includePaths: [path.dirname(opts.entryPoint)].concat(includePaths),
   })
 
   return compile(main, parse(contents), options)

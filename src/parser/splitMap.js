@@ -2,11 +2,14 @@
 
 type carryType = { acc: Array<string>, opened: number }
 
-module.exports = (carry: carryType, char: string) => {
-  if (carry.opened === 0 && char === ',') {
+module.exports = (carry: carryType | void, char: string): carryType => {
+  const acc = carry ? carry.acc : ['']
+  const opened = carry ? carry.opened : 0
+
+  if (opened === 0 && char === ',') {
     return {
-      acc: carry.acc.concat(''),
-      opened: carry.opened,
+      opened,
+      acc: acc.concat(''),
     }
   }
 
@@ -14,7 +17,7 @@ module.exports = (carry: carryType, char: string) => {
   const closes = char === ')' ? -1 : 0
 
   return {
-    acc: carry.acc.slice(0, -1).concat(`${carry.acc.slice(-1)[0]}${char}`),
-    opened: carry.opened + opens + closes,
+    acc: acc.slice(0, -1).concat(`${acc.slice(-1)[0]}${char}`),
+    opened: Math.max(opened + opens + closes, 0),
   }
 }
