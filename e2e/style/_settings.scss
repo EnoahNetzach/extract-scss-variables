@@ -19,6 +19,21 @@ $foundation-palette: (
   warning: rgb(247, 190, 44),
 );
 
+$palette-copy: $foundation-palette;
+
+$stringMockingAMap: "(a: 42, b: 666)";
+$stringMockingTheQuoteEscaping: "&quot;asdf&quot;";
+$stringWithEscapedQuotesAndSemicolons: "asd\"aef \" ;fdsfd";
+$stringWithEscapedBackslash: "asd\"aef \" ;f\\";
+
+$deepMap: (
+  a: 1,
+  b: 2,
+  c: (a: 1, b:2),
+);
+
+$deepMapValue: map-get(map-get($deepMap, c), b);
+
 $global-flexbox: true;
 $global-font-size: 14px;
 $global-radius: 4px;

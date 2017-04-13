@@ -18,10 +18,45 @@ describe('Extract SCSS variables', () => {
   })
 
   it('extracts map variables', () => {
-    expect(variables['breakpoints_large']).toBe('1024px')
+    expect(variables.breakpoints.large).toBe('1024px')
   })
 
   it('extracts overridden map variables', () => {
-    expect(variables['foundation-palette_alert']).toBe('#f95c28')
+    expect(variables['foundation-palette'].alert).toBe('#f95c28')
+  })
+
+  it('maintains copied variables the same', () => {
+    expect(variables['palette-copy']).toEqual(variables['foundation-palette'])
+  })
+
+  it('handles strings containing map-like text', () => {
+    expect(variables.stringMockingAMap).toBe('(a: 42, b: 666)')
+  })
+
+  it('handles strings with "&quot;" at the beginning and/or ending', () => {
+    expect(variables.stringMockingTheQuoteEscaping).toBe('&quot;asdf&quot;')
+  })
+
+  it('handles strings with escaped quotes and semicolons', () => {
+    expect(variables.stringWithEscapedQuotesAndSemicolons).toBe('asd"aef " ;fdsfd')
+  })
+
+  it('handles strings with an escaped backslash at the end', () => {
+    expect(variables.stringWithEscapedBackslash).toBe('asd"aef " ;f\\\\')
+  })
+
+  it('extracts deep maps', () => {
+    expect(variables.deepMap).toEqual({
+      a: '1',
+      b: '2',
+      c: {
+        a: '1',
+        b: '2',
+      },
+    })
+  })
+
+  it('extracts deep map values', () => {
+    expect(variables.deepMapValue).toBe('2')
   })
 })

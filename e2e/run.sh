@@ -34,7 +34,7 @@ cd "$(dirname "$0")"
 set -x
 
 npm install
-npm install -S node-sass@^${NODE_SASS} ${package_path}
+npm install node-sass@^${NODE_SASS} ${package_path}
 
 # Test the scss compiles
 npm run scss

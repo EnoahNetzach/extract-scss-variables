@@ -47,22 +47,10 @@ describe('Parser', () => {
         ' c: (x: 1, y: 2, z: 3),' +
         ');'
 
-      expect(parseDeclaration(text)).toEqual([{
-        value: '1',
-        variable: 'decl-map_a',
-      }, {
-        value: 'rgb(0, 0, 0)',
-        variable: 'decl-map_b',
-      }, [{
-        value: '1',
-        variable: 'decl-map_c_x',
-      }, {
-        value: '2',
-        variable: 'decl-map_c_y',
-      }, {
-        value: '3',
-        variable: 'decl-map_c_z',
-      }]])
+      expect(parseDeclaration(text)).toEqual({
+        value: '(a: 1, b: rgb(0, 0, 0), c: (x: 1, y: 2, z: 3),)',
+        variable: 'decl-map',
+      })
     })
 
     it('throws if it is not a declaration', () => {

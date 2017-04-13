@@ -1,6 +1,6 @@
 // @flow
 
-import type { ruleType } from './rule.type'
+import type { ruleType } from '../utils/rule.type'
 
 const wrappingCssId = require('./wrappingCssId')
 

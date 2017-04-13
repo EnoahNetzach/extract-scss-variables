@@ -1,3 +1,6 @@
 // @flow
 
-module.exports = '\\$\'?((?!\\d)[\\w_-][\\w\\d_-]*)\'?:\\s*([^;]+)(?:\\s*!global;|;(?![^\\{]*\\}))'
+const variable = '(?!\\d)[\\w_-][\\w\\d_-]*'
+const value = '[^;"]+|"(?:[^"]+|(?:\\\\"|[^"])*)"'
+
+module.exports = `\\$'?(${variable})'?:\\s*(${value})(?:\\s*!(global|default);|;(?![^\\{]*\\}))`
