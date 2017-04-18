@@ -13,6 +13,15 @@ describe('Parser', () => {
       })
     })
 
+    it('parses a declaration with extra spaces', () => {
+      const text = '$decl-spaces  : "spaces" ;'
+
+      expect(parseDeclaration(text)).toEqual({
+        value: '"spaces"',
+        variable: 'decl-spaces',
+      })
+    })
+
     it('parses default declarations', () => {
       const text = '$decl-default: "default" !default;'
 
