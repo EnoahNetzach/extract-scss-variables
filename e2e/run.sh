@@ -22,7 +22,7 @@ trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
 package_path=../$(npm pack | tail -n1)
 
 # Install peer dependencies for later usage
-npm install -S node-sass@^${NODE_SASS}
+npm install node-sass@^${NODE_SASS}
 
 # Build
 npm run build
@@ -34,7 +34,7 @@ cd "$(dirname "$0")"
 set -x
 
 npm install
-npm install node-sass@^${NODE_SASS} ${package_path}
+npm install ${package_path}
 
 # Test the scss compiles
 npm run scss

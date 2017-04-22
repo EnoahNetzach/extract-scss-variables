@@ -34,12 +34,12 @@ install:
 
   - npm install
   - ps: $env:package_path = "$(pwd)\$(npm pack | tail -n1)"
-  - npm install -S node-sass@^%NODE_SASS%
+  - npm install node-sass@^%NODE_SASS%
   - npm ls jest
 
   - cd C:\projects\extract-scss-variables\e2e
   - npm install
-  - npm install -S node-sass@^%NODE_SASS% %package_path%
+  - npm install %package_path%
   - cd C:\projects\extract-scss-variables
 
 test_script:
