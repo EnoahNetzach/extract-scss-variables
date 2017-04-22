@@ -1,8 +1,8 @@
 // @flow
 
-const globalVariableSyntax = require('./globalVariableSyntax')
+import globalVariableSyntax from './globalVariableSyntax'
 
-module.exports = (content: string) => {
+export default (content: string) => {
   const matches = content.match(new RegExp(globalVariableSyntax, 'g'))
 
   if (!matches) {

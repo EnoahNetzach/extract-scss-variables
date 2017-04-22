@@ -1,3 +1,3 @@
 // @flow
 
-module.exports = (a: any) => a
+export default (a: any) => a

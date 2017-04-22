@@ -1,6 +1,6 @@
 // @flow
 
-const sass = require('node-sass')
+import sass from 'node-sass'
 
-module.exports = (data: string, options: { [string]: any }) =>
+export default (data: string, options: { [string]: any }) =>
   sass.renderSync(Object.assign({}, options, { data })).css.toString()

@@ -1,4 +1,4 @@
-const idOp = require('../idOp')
+import idOp from '../idOp'
 
 describe('Utils', () => {
   describe('idOp', () => {

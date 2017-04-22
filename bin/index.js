@@ -7,7 +7,7 @@ const commander = require('commander')
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
-const extractScssVariables = require('../dist')
+const extractScssVariables = require('../dist').default
 
 let entryPoint = ''
 

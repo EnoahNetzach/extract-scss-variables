@@ -2,7 +2,7 @@
 
 type carryType = { acc: Array<string>, opened: number }
 
-module.exports = (carry: carryType | void, char: string): carryType => {
+export default (carry: carryType | void, char: string): carryType => {
   const acc = carry ? carry.acc : ['']
   const opened = carry ? carry.opened : 0
 

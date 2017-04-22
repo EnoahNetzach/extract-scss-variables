@@ -1,4 +1,6 @@
 {
   "plugins": ["transform-flow-strip-types"],
-  "ignore": ["**/__mocks__/*", "**/__tests__/*"]
+  "presets": [
+    ["env", {"targets": { "node": 4 } }]
+  ]
 }

@@ -1,6 +1,6 @@
 // @flow
 
-const unwrap = require('../unwrap')
+import unwrap from '../unwrap'
 
 describe('Compiler', () => {
   describe('unwrap', () => {

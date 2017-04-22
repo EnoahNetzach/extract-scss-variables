@@ -2,6 +2,6 @@
 
 import type { ruleType } from '../utils/rule.type'
 
-const wrappingCssId = require('./wrappingCssId')
+import wrappingCssId from './wrappingCssId'
 
-module.exports = (rule: ruleType) => `#${wrappingCssId}.${rule.variable}{content:"#{${rule.value}}";}`
+export default (rule: ruleType) => `#${wrappingCssId}.${rule.variable}{content:"#{${rule.value}}";}`

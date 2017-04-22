@@ -1,6 +1,6 @@
 // @flow
 
-const appendRules = require('../appendRules')
+import appendRules from '../appendRules'
 
 describe('Compiler', () => {
   describe('appendRules', () => {

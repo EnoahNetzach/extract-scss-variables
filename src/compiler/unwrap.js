@@ -1,8 +1,8 @@
 // @flow
 
-const unwrapRegExp = require('./unwrapRegExp')
+import unwrapRegExp from './unwrapRegExp'
 
-module.exports = (rule: string) => {
+export default (rule: string) => {
   const matches = rule.match(unwrapRegExp)
 
   if (!matches) {

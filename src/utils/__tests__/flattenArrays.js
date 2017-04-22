@@ -1,6 +1,6 @@
 // @flow
 
-const flattenArrays = require('../flattenArrays')
+import flattenArrays from '../flattenArrays'
 
 describe('Utils', () => {
   describe('flattenArrays', () => {

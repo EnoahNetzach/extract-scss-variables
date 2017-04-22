@@ -1,8 +1,8 @@
 // @flow
 
-const splitMap = require('./splitMap')
+import splitMap from './splitMap'
 
-module.exports = (value: string) => value.startsWith('(')
+export default (value: string) => value.startsWith('(')
   && value.endsWith(')')
   && value.includes(',')
   && value

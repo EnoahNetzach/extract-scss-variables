@@ -1,6 +1,6 @@
 // @flow
 
-const omitDuplicates = require('../omitDuplicates')
+import omitDuplicates from '../omitDuplicates'
 
 describe('Compiler', () => {
   describe('omitDuplicates', () => {

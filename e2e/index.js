@@ -1,7 +1,7 @@
 const path = require('path')
 const extractScssVariables = process.env.NODE_ENV === 'test'
-  ? require('../src')
-  : require('extract-scss-variables')
+  ? require('../dist').default
+  : require('extract-scss-variables').default
 
 const nodeModulesPath = path.join(__dirname, 'node_modules')
 const stylePath = path.join(__dirname, 'style')

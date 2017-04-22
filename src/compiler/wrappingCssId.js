@@ -1,3 +1,3 @@
 // @flow
 
-module.exports = 'extract-scss-values-test-class'
+export default 'extract-scss-values-test-class'

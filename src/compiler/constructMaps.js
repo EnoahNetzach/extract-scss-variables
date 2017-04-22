@@ -2,8 +2,8 @@
 
 import type { ruleType } from '../utils/rule.type'
 
-const isAMap = require('../utils/isAMap')
-const idOp = require('../utils/idOp')
+import isAMap from '../utils/isAMap'
+import idOp from '../utils/idOp'
 
 const getMap = (value: string) => {
   const map = isAMap(value)
@@ -28,7 +28,7 @@ const getMap = (value: string) => {
     }, {})
 }
 
-module.exports = (rule: ruleType) => ({
+export default (rule: ruleType) => ({
   value: getMap(rule.value),
   variable: rule.variable,
 })

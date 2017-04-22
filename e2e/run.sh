@@ -67,6 +67,8 @@ node_modules/.bin/extract-scss-variables \
   -o ${tmp_file}
 test ! -z `cat ${tmp_file} | head -c 10`
 
+cd ..
+
 # Check coding style
 npm run eslint
 

@@ -62,6 +62,8 @@ test_script:
   - ps: node_modules\.bin\extract-scss-variables style\bundle.scss -f node_modules\foundation-sites\scss\settings\_settings.scss -f node_modules\foundation-sites\scss\_global.scss -f style\_settings.scss -f style\_globals.scss -c sass-config.json -o %tmp_file_json_file%
   - ps: if ((Get-Content "$env:tmp_file_json_file") -eq $Null) { exit 1 }
 
+  - cd ..
+
   # Check coding style
   - npm run eslint
 

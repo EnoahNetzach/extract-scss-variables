@@ -1,6 +1,6 @@
 // @flow
 
-const extractDeclarations = require('../extractDeclarations')
+import extractDeclarations from '../extractDeclarations'
 
 describe('Parser', () => {
   describe('extractDeclarations', () => {

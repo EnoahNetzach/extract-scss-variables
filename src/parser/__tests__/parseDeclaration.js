@@ -1,6 +1,6 @@
 // @flow
 
-const parseDeclaration = require('../parseDeclaration')
+import parseDeclaration from '../parseDeclaration'
 
 describe('Parser', () => {
   describe('parseDeclaration', () => {

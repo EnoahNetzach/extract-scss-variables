@@ -2,9 +2,9 @@
 
 import type { ruleType } from '../utils/rule.type'
 
-const quoteEscapeToken = require('../utils/quoteEscapeToken')
+import quoteEscapeToken from '../utils/quoteEscapeToken'
 
-module.exports = (rule: ruleType) => ({
+export default (rule: ruleType) => ({
   value: rule.value
     .replace(/^"/g, `"${quoteEscapeToken}`).replace(/"$/g, `${quoteEscapeToken}"`)
     .replace(/^'/g, `'${quoteEscapeToken}`).replace(/'$/g, `${quoteEscapeToken}'`),

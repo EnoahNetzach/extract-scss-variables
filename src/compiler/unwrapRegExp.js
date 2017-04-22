@@ -1,5 +1,5 @@
 // @flow
 
-const wrappingCssId = require('./wrappingCssId')
+import wrappingCssId from './wrappingCssId'
 
-module.exports = `#${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*["'](.+)["']`
+export default `#${wrappingCssId}\\.(.+)\\s*\\{\\s*content:\\s*["'](.+)["']`

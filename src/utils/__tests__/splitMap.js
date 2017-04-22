@@ -1,6 +1,6 @@
 // @flow
 
-const splitMap = require('../splitMap')
+import splitMap from '../splitMap'
 
 describe('Parser', () => {
   describe('splitMap', () => {

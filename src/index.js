@@ -1,9 +1,9 @@
 // @flow
 
-const fs = require('fs')
-const path = require('path')
-const compile = require('./compiler')
-const parse = require('./parser')
+import fs from 'fs'
+import path from 'path'
+import compile from './compiler'
+import parse from './parser'
 
 type optsType = {
   entryPoint: string,
@@ -11,7 +11,7 @@ type optsType = {
   sassOptions?: { [string]: any },
 }
 
-module.exports = (opts: optsType) => {
+export default (opts: optsType) => {
   const main = fs.readFileSync(opts.entryPoint).toString()
   const contents = opts.files.map(file => fs.readFileSync(file).toString())
 

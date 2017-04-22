@@ -2,6 +2,6 @@
 
 import type { ruleType } from '../utils/rule.type'
 
-const wrap = require('./wrap')
+import wrap from './wrap'
 
-module.exports = (carry: string, entry: ruleType) => `${carry}\n${wrap(entry)}`
+export default (carry: string, entry: ruleType) => `${carry}\n${wrap(entry)}`

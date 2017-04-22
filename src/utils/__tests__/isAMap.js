@@ -1,6 +1,6 @@
 // @flow
 
-const isAMap = require('../isAMap')
+import isAMap from '../isAMap'
 
 describe('Parser', () => {
   describe('isAMap', () => {

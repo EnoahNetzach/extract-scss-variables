@@ -1,11 +1,11 @@
 // @flow
 
-const flattenArrays = require('../utils/flattenArrays')
-const escapeQuotes = require('./escapeQuotes')
-const extractDeclarations = require('./extractDeclarations')
-const parseDeclaration = require('./parseDeclaration')
+import flattenArrays from '../utils/flattenArrays'
+import escapeQuotes from './escapeQuotes'
+import extractDeclarations from './extractDeclarations'
+import parseDeclaration from './parseDeclaration'
 
-module.exports = (contents: Array<string>) => contents
+export default (contents: Array<string>) => contents
   .map(extractDeclarations)
   .reduce(flattenArrays, [])
   .map(element => parseDeclaration(element))

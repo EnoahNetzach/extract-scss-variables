@@ -1,5 +1,8 @@
 // @flow
 
+import sass from 'node-sass'
+import compileSass from '../compileSass'
+
 jest.mock('node-sass', () => {
   const renderSync = () => ({
     css: {
@@ -9,9 +12,6 @@ jest.mock('node-sass', () => {
 
   return { renderSync }
 })
-
-const sass = require('node-sass')
-const compileSass = require('../compileSass')
 
 describe('Compiler', () => {
   describe('compileSass', () => {
