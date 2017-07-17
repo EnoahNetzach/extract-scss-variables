@@ -6,7 +6,7 @@ export default (content: string) => {
   const matches = content.match(new RegExp(globalVariableSyntax, 'g'))
 
   if (!matches) {
-    return [];
+    return []
   }
 
   return matches
