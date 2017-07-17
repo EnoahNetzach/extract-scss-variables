@@ -11,6 +11,7 @@ const files = [
   [nodeModulesPath, 'foundation-sites', 'scss', '_global.scss'],
   [stylePath, '_settings.scss'],
   [stylePath, '_globals.scss'],
+  [stylePath, '_override.scss'],
 ].map(paths => path.join.apply(path, paths))
 
 const includePaths = [
