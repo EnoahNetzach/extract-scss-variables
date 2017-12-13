@@ -2,7 +2,7 @@
   "name": "extract-scss-variables",
   "version": "0.2.1",
   "engines": {
-    "node": "^4 || ^6 || ^7 || ^8"
+    "node": ">=4"
   },
   "description": "Extract variables from SCSS files",
   "keywords": [
