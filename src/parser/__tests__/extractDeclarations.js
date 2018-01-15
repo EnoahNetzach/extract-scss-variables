@@ -42,12 +42,12 @@ describe('Parser', () => {
       ])
     })
 
-    it('throws if there are no declarations', () => {
+    it('returns empty list if there are no declarations', () => {
       const text = '.c {\n' +
         '  $inner-decl: "inner";\n' +
         '}'
 
-      expect(() => extractDeclarations(text)).toThrowError(/Error while extracting declaration:\n\t/)
+      expect(extractDeclarations(text)).toEqual([])
     })
   })
 })
